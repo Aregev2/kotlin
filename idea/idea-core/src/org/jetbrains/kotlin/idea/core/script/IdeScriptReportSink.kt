@@ -24,7 +24,9 @@ import kotlin.script.experimental.dependencies.ScriptReport
 class IdeScriptReportSink : ScriptReportSink {
     override fun attachReports(scriptFile: VirtualFile, reports: List<ScriptReport>) {
         // TODO: persist errors between launches?
-        scriptFile.putUserData(Reports, reports)
+        if (reports.isNotEmpty()) {
+            scriptFile.putUserData(Reports, reports)
+        }
     }
 
     object Reports : Key<List<ScriptReport>>("KOTLIN_SCRIPT_REPORTS")
